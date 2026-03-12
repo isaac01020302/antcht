@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HackShield Scanner</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff88;
+font-family:monospace;
+text-align:center;
+padding:25px;
+}
+
+h1{
+font-size:32px;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+border:2px solid #00ff88;
+background:black;
+color:#00ff88;
+cursor:pointer;
+margin-top:20px;
+}
+
+#barra{
+width:80%;
+height:25px;
+border:2px solid #00ff88;
+margin:25px auto;
+}
+
+#progresso{
+width:0%;
+height:100%;
+background:#00ff88;
+}
+
+#apps{
+margin-top:20px;
+font-size:16px;
+}
+
+#resultado{
+font-size:22px;
+margin-top:20px;
+}
+
+#risco{
+font-size:20px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🛡 HackShield Scanner</h1>
+
+<p>Escaneando sistema contra hacks</p>
+
+<button onclick="scan()">INICIAR SCAN</button>
+
+<div id="barra">
+<div id="progresso"></div>
+</div>
+
+<div id="apps"></div>
+
+<div id="resultado"></div>
+
+<div id="risco"></div>
+
+<script>
+
+let listaApps=[
+"Google Play Services",
+"WhatsApp",
+"Instagram",
+"Free Fire",
+"Game Guardian",
+"Lucky Patcher",
+"Auto Clicker",
+"Mod Menu Tool",
+"Macro Tool",
+"Chrome"
+];
+
+let appsSuspeitos=[
+"Game Guardian",
+"Lucky Patcher",
+"Auto Clicker",
+"Mod Menu Tool",
+"Macro Tool"
+];
+
+function scan(){
+
+let progresso=0;
+
+document.getElementById("apps").innerHTML="";
+document.getElementById("resultado").innerHTML="🔍 Iniciando análise...";
+document.getElementById("risco").innerHTML="";
+
+let barra=setInterval(function(){
+
+progresso+=4;
+
+document.getElementById("progresso").style.width=progresso+"%";
+
+if(progresso%20===0){
+
+let app=listaApps[Math.floor(Math.random()*listaApps.length)];
+
+document.getElementById("apps").innerHTML+="<br> analisando: "+app;
+
+}
+
+if(progresso>=100){
+
+clearInterval(barra);
+
+resultado();
+
+}
+
+},120);
+
+}
+
+function resultado(){
+
+let risco=Math.floor(Math.random()*100);
+
+let encontrado=appsSuspeitos[Math.floor(Math.random()*appsSuspeitos.length)];
+
+if(risco>60){
+
+document.getElementById("resultado").innerHTML=
+"⚠ ameaça detectada: "+encontrado;
+
+}else{
+
+document.getElementById("resultado").innerHTML=
+"🟢 sistema seguro";
+
+}
+
+document.getElementById("risco").innerHTML="nível de risco: "+risco+"%";
+
+}
+
+</script>
+
+</body>
+</html>
